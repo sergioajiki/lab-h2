@@ -12,11 +12,18 @@ public class PessoaService {
     @Autowired
     private PessoaDao pessoaDao;
 
+    // Método para obter uma lista com todas as pessoas
     public List<PessoaVo> getAllPessoas() {
         return pessoaDao.getAllPessoas();
     }
 
+    // Método para obter uma pessoa pelo ID
     public PessoaVo getPessoaById(Integer id) {
         return pessoaDao.getPessoaById(id);
+    }
+
+    // Método para cadastrar uma pessoa
+    public void cadastrarPessoa(PessoaVo pessoa) {
+        pessoaDao.insertPessoa(pessoa);
     }
 }
