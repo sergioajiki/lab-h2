@@ -4,9 +4,11 @@ import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DatabaseVerifier implements CommandLineRunner {
     @Autowired
     private PessoaDao pessoaDao;
