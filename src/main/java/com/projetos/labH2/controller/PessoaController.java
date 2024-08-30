@@ -33,13 +33,8 @@ public class PessoaController {
     }
 
     // Endpoint para deletar uma pessoa pelo ID
-    @DeleteMapping("/deletar/{id}")
-    public String deletarPessoa(@PathVariable int id) {
-        try {
-            pessoaService.deletarPessoaById(id);
-            return "Pessoa deletada com sucesso!";
-        } catch (Exception e) {
-            return "Erro ao deletar pessoa: " + e.getMessage();
-        }
+    @GetMapping("/apagar/{id}")
+    public void deletarPessoa(@PathVariable int id) {
+         pessoaService.deletarPessoaById(id);
     }
 }

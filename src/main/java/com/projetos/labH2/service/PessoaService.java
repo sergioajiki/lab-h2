@@ -28,7 +28,7 @@ public class PessoaService {
     }
 
     // Método para deletar uma pessoa pelo ID
-    public void deletarPessoaById(int id) {
-        pessoaDao.deletePessoaById(id);
+    public boolean deletarPessoaById(int id) {
+        return pessoaDao.deletePessoaById(id);
     }
 }
