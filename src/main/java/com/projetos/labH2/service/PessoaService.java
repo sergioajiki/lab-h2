@@ -26,4 +26,9 @@ public class PessoaService {
     public void cadastrarPessoa(PessoaVo pessoa) {
         pessoaDao.insertPessoa(pessoa);
     }
+
+    // Método para deletar uma pessoa pelo ID
+    public void deletarPessoaById(int id) {
+        pessoaDao.deletePessoaById(id);
+    }
 }
