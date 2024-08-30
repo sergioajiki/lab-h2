@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projetos.labH2.labDAO.PessoaDao">
+    <!-- Mapeamento para o método insertPessoa -->
+    <insert id="insertPessoa" parameterType="PessoaVo">
+        INSERT INTO h2dev.pessoa (nome, idade, email)
+        VALUES (#{nome}, #{idade}, #{email})
+    </insert>
+
+    <!-- Mapeamento para o método getAllPessoas -->
+    <select id="getAllPessoas" resultType="PessoaVo">
+        SELECT id, nome, idade, email FROM h2dev.pessoa
+    </select>
+</mapper>
