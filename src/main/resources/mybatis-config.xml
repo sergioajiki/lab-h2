@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
     <typeAliases>
         <!-- Alias para simplificar o uso do VO -->
         <typeAlias alias="PessoaVo" type="com.projetos.labH2.labVO.PessoaVo"/>

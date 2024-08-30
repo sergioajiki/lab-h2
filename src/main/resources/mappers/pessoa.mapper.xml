@@ -14,4 +14,10 @@
     <select id="getAllPessoas" resultType="PessoaVo">
         SELECT id, nome, idade, email FROM h2dev.pessoa
     </select>
+
+    <select id="getPessoaById" parameterType="int" resultType="PessoaVo">
+        SELECT id, nome, idade, email FROM h2dev.pessoa
+        WHERE id= #{id}
+    </select>
+
 </mapper>

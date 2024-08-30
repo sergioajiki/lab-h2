@@ -9,4 +9,5 @@ import java.util.List;
 public interface PessoaDao {
     void insertPessoa(PessoaVo pessoa);
     List<PessoaVo> getAllPessoas();
+
 }
