@@ -1,6 +1,6 @@
-package com.projetos.labH2.labVo;
+package com.projetos.labH2.labVO;
 
-public class pessoaVo {
+public class PessoaVo {
     private int id;
     private String nome;
     private int idade;

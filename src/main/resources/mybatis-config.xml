@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <!-- Alias para simplificar o uso do VO -->
+        <typeAlias alias="PessoaVo" type="com.projetos.labH2.labVO.PessoaVo"/>
+    </typeAliases>
+
+    <mappers>
+        <!-- Mapeador do PessoaDao -->
+        <mapper resource="mappers/pessoa.mapper.xml"/>
+    </mappers>
+
+</configuration>
