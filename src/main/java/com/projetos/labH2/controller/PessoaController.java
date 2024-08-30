@@ -3,9 +3,7 @@ package com.projetos.labH2.controller;
 import com.projetos.labH2.labVO.PessoaVo;
 import com.projetos.labH2.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,13 @@ public class PessoaController {
         return pessoaService.getPessoaById(id);
     }
 
-
-
-
+    @PostMapping("/cadastrar")
+    public String cadastrarPessoa(@RequestBody PessoaVo pessoa) {
+        try {
+            pessoaService.cadastrarPessoa(pessoa);
+            return "Pessoa cadastrada com sucesso!";
+        } catch (Exception ex) {
+            return "Erro ao cadastrar pessoa" + ex.getMessage();
+        }
+    }
 }
