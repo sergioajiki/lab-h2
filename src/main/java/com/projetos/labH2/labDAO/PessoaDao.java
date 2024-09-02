@@ -12,9 +12,9 @@ public interface PessoaDao {
 
     List<PessoaVo> getAllPessoas();
 
-    PessoaVo getPessoaById(@Param("id") int id);
+    PessoaVo getPessoaById(@Param("id") Long id);
 
-    void deletePessoaById(@Param("id") int id);
+    void deletePessoaById(@Param("id") Long id);
 
     PessoaVo updatePessoaById(PessoaVo pessoa);
 }

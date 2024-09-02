@@ -20,7 +20,7 @@ public class PessoaService {
     }
 
     // Método para obter uma pessoa pelo ID
-    public PessoaVo getPessoaById(Integer id) {
+    public PessoaVo getPessoaById(Long id) {
         var pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
@@ -34,7 +34,7 @@ public class PessoaService {
     }
 
     // Método para deletar uma pessoa pelo ID
-    public void deletarPessoaById(int id) {
+    public void deletarPessoaById(Long id) {
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
@@ -43,7 +43,7 @@ public class PessoaService {
     }
 
     // Método para atualizar uma pessoa
-    public PessoaVo updatePessoaById(int id, PessoaVo pessoa) {
+    public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
