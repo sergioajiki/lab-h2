@@ -20,7 +20,7 @@ public class GeneralControllerAdvice {
     @ExceptionHandler
     public ResponseEntity<Problem> handleNotFoundException(NotFoundException exception) {
         Problem problem = new Problem(
-                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.NOT_FOUND.value(),
                 "Informação não encontrada",
                 exception.getMessage(),
                 null

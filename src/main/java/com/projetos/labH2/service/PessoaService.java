@@ -1,5 +1,6 @@
 package com.projetos.labH2.service;
 
+import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ public class PessoaService {
 
     // Método para obter uma pessoa pelo ID
     public PessoaVo getPessoaById(Integer id) {
-        return pessoaDao.getPessoaById(id);
+        var pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
+        if (pessoaOptional.isEmpty()){
+            throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
+        }
+        return pessoaOptional.get();
     }
 
     // Método para cadastrar uma pessoa

@@ -53,13 +53,6 @@ public class PessoaController {
     public ResponseEntity<String> deletarPessoa(@PathVariable int id) {
         pessoaService.deletarPessoaById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Pessoa com o id " + id + " apagada com sucesso!");
-
-//        try {
-//            pessoaService.deletarPessoaById(id);
-//            return "Pessoa deletada com sucesso!";
-//        } catch (Exception ex) {
-//            return "Erro ao deletar pessoa: " + ex.getMessage();
-//        }
     }
 
     // Endpoint para atualizar uma pessoa pelo ID
@@ -68,11 +61,5 @@ public class PessoaController {
     public ResponseEntity<String> updatePessoa(@PathVariable int id, @RequestBody PessoaVo pessoa) {
         PessoaVo pessoaUpdatedById = pessoaService.updatePessoaById(id, pessoa);
         return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoa.getNome() + " atualizada com sucesso!");
-//        try {
-//            PessoaVo pessoaUpdatedById = pessoaService.updatePessoaById(id, pessoa);
-//            return "Pessoa " + pessoa.getNome() + " atualizada com sucesso!";
-//        } catch (Exception ex) {
-//            return "Erro ao atualizar pessoa: " + ex.getMessage();
-//        }
     }
 }
