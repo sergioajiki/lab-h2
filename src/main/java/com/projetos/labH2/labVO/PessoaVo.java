@@ -1,9 +1,14 @@
 package com.projetos.labH2.labVO;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class PessoaVo {
     private int id;
+    @NotEmpty(message = "O campo nome é obrigatório")
     private String nome;
+    @NotEmpty(message = "O campo idade é obrigatório")
     private int idade;
+    @NotEmpty(message = "O campo email é obrigatório")
     private String email;
 
     public int getId() {
