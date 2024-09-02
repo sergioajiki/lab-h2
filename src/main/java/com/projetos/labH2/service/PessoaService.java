@@ -34,12 +34,14 @@ public class PessoaService {
     }
 
     // Método para atualizar uma pessoa
-    public void updatePessoaById(int id, PessoaVo pessoa) {
+    public PessoaVo updatePessoaById(int id, PessoaVo pessoa) {
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new RuntimeException("Pessoa não encontrada");
         }
         pessoa.setId(id);
         pessoaDao.updatePessoaById(pessoa);
+
+        return pessoa;
     }
 }
