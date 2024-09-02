@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PessoaService {
@@ -28,7 +29,17 @@ public class PessoaService {
     }
 
     // Método para deletar uma pessoa pelo ID
-    public boolean deletarPessoaById(int id) {
-        return pessoaDao.deletePessoaById(id);
+    public void deletarPessoaById(int id) {
+        pessoaDao.deletePessoaById(id);
+    }
+
+    // Método para atualizar uma pessoa
+    public void updatePessoaById(int id, PessoaVo pessoa) {
+        Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
+        if (pessoaOptional.isEmpty()) {
+            throw new RuntimeException("Pessoa não encontrada");
+        }
+        pessoa.setId(id);
+        pessoaDao.updatePessoaById(pessoa);
     }
 }

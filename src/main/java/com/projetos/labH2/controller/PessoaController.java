@@ -45,7 +45,24 @@ public class PessoaController {
     // Endpoint para apagar uma pessoa pelo ID
     @DeleteMapping("/{id}")
     @Operation(description = "Apaga o registro da pessoa selecionada por id")
-    public void deletarPessoa(@PathVariable int id) {
-        pessoaService.deletarPessoaById(id);
+    public String deletarPessoa(@PathVariable int id) {
+        try {
+            pessoaService.deletarPessoaById(id);
+            return "Pessoa deletada com sucesso!";
+        } catch (Exception ex) {
+            return "Erro ao deletar pessoa: " + ex.getMessage();
+        }
+    }
+
+    // Endpoint para atualizar uma pessoa pelo ID
+    @PutMapping("/{id}")
+    @Operation(description = "Atualiza o resgistro da pessoa selecionada por id")
+    public String updatePessoa(@PathVariable int id, @RequestBody PessoaVo pessoa){
+        try {
+            pessoaService.updatePessoaById(id, pessoa);
+            return "Pessoa atualizada com sucesso!";
+        } catch (Exception ex) {
+            return "Erro ao atualizar pessoa: " + ex.getMessage();
+        }
     }
 }

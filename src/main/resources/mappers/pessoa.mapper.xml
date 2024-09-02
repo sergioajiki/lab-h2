@@ -28,4 +28,11 @@
         WHERE id = #{id}
     </delete>
 
+    <!-- Mapeamento para o método updatePessoaById -->
+    <update id="updatePessoaById" parameterType="PessoaVo">
+        UPDATE h2dev.pessoa
+        SET nome = #{nome}, idade = #{idade}, email = #{email}
+        WHERE id = #{id}
+    </update>
+
 </mapper>
