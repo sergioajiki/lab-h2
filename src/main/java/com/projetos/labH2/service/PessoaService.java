@@ -42,6 +42,7 @@ public class PessoaService {
 //            throw new InvalidEmailFormatException("Formato de email inválido");
 //        }
         validarEmail(pessoa.getEmail());
+        normalizarDados(pessoa);
         pessoaDao.insertPessoa(pessoa);
     }
 
@@ -56,6 +57,7 @@ public class PessoaService {
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
+        normalizarDados(pessoa);
         pessoa.setId(id); // Confirma que o id seja atualizado corretamente
         pessoaDao.updatePessoaById(pessoa);
         return pessoa;
@@ -70,9 +72,15 @@ public class PessoaService {
         pessoaDao.deletePessoaById(id);
     }
 
+    // Método para validar o formato do Email
     private void validarEmail(String email){
         if(!EmailValidator.isValidEmail(email)){
             throw new InvalidEmailFormatException("Formato de email inválido");
         }
+    }
+    // Método para converter para minúsculas
+    private void normalizarDados(PessoaVo pessoa) {
+        pessoa.setNome(pessoa.getNome().toLowerCase());
+        pessoa.setEmail(pessoa.getEmail().toLowerCase());
     }
 }

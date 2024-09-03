@@ -1,2 +1,10 @@
-INSERT INTO pessoa (nome, idade, email) VALUES ('João Silva', 30, 'joao@example.com');
-INSERT INTO pessoa (nome, idade, email) VALUES ('Maria Oliveira', 25, 'maria@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('bia souza', 28, 'bia.souza@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('bruno lima', 35, 'bruno.lima@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('carla mendes', 22, 'carla.mendes@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('diego almeida', 40, 'diego.almeida@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('bia ferreira', 31, 'bia.ferreira@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('fabio nascimento', 27, 'fabio.nascimento@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('gabriela ribeiro', 33, 'gabriela.ribeiro@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('heitor cardoso', 45, 'heitor.cardoso@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('isabela santos', 29, 'isabela.santos@example.com');
+INSERT INTO pessoa (nome, idade, email) VALUES ('joao viana', 26, 'joao.viana@example.com');
