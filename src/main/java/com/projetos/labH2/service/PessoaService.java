@@ -23,7 +23,7 @@ public class PessoaService {
 
     // Método para buscar pessoa por nome
     public List<PessoaVo> getPessoaByNome(String nome) {
-        return pessoaDao.getPessoaByNome(nome);
+        return pessoaDao.getPessoaByNome(nome.toLowerCase());
     }
 
     // Método para obter uma pessoa pelo ID
@@ -37,10 +37,6 @@ public class PessoaService {
 
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
-//        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
-//        if (!isEmail) {
-//            throw new InvalidEmailFormatException("Formato de email inválido");
-//        }
         validarEmail(pessoa.getEmail());
         normalizarDados(pessoa);
         pessoaDao.insertPessoa(pessoa);
@@ -48,10 +44,6 @@ public class PessoaService {
 
     // Método para atualizar uma pessoa
     public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
-//        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
-//        if (!isEmail) {
-//            throw new InvalidEmailFormatException("Formato de email inválido");
-//        }
         validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
