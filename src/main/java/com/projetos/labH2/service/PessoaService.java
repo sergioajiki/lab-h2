@@ -5,6 +5,7 @@ import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
 import com.projetos.labH2.util.EmailValidator;
+import com.projetos.labH2.util.FormatDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class PessoaService {
     public void cadastrarPessoa(PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         normalizarDados(pessoa);
+        dataNascimentoFormatoBanco(pessoa);
         pessoaDao.insertPessoa(pessoa);
     }
 
@@ -74,5 +76,11 @@ public class PessoaService {
     private void normalizarDados(PessoaVo pessoa) {
         pessoa.setNome(pessoa.getNome().toLowerCase());
         pessoa.setEmail(pessoa.getEmail().toLowerCase());
+    }
+
+    // Método para converter data_nascimento para o formato yyyy-MM-dd para o registro no banco'
+    private void dataNascimentoFormatoBanco(PessoaVo pessoa){
+        String dataFormatada = FormatDateUtil.converterParaFormatoYYYYMMDD(pessoa.getData_nascimento());
+        pessoa.setData_nascimento(dataFormatada);
     }
 }

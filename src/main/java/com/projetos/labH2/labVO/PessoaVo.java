@@ -16,5 +16,8 @@ public class PessoaVo {
 
     @NotEmpty(message = "O campo email é obrigatório")
     private String email;
-}
 
+    @NotNull(message = "O campo data_nascimento é obrigatório")
+    private String data_nascimento;
+
+}
