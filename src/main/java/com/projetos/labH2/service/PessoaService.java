@@ -3,6 +3,7 @@ package com.projetos.labH2.service;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
+import com.projetos.labH2.util.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,7 @@ public class PessoaService {
 
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
+        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
         pessoaDao.insertPessoa(pessoa);
     }
 
