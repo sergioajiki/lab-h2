@@ -40,12 +40,8 @@ public class PessoaController {
     @PostMapping("/cadastrar")
     @Operation(description = "Cadastra uma pessoa")
     public ResponseEntity<String> cadastrarPessoa(@RequestBody @Valid PessoaVo pessoa) {
-        try {
-            pessoaService.cadastrarPessoa(pessoa);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Pessoa cadastrada com sucesso");
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body("Erro ao cadastrar pessoa" + ex.getMessage());
-        }
+        pessoaService.cadastrarPessoa(pessoa);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Pessoa cadastrada com sucesso");
     }
 
     // Endpoint para apagar uma pessoa pelo ID

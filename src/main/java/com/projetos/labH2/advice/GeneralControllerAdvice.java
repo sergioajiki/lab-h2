@@ -4,6 +4,7 @@ import com.projetos.labH2.advice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -66,5 +67,16 @@ public class GeneralControllerAdvice {
                 problemList
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+        Problem problem = new Problem(
+                HttpStatus.CONFLICT.value(),
+                "Violação de índice exclusivo ou chave primária",
+                exception.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
     }
 }
