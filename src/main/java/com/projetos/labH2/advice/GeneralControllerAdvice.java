@@ -1,5 +1,6 @@
 package com.projetos.labH2.advice;
 
+import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -46,7 +47,6 @@ public class GeneralControllerAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Problem> handleFieldNotFound(MethodArgumentNotValidException exception) {
         List<ErrorMessageRecord> problemList = new ArrayList<>();
@@ -78,5 +78,16 @@ public class GeneralControllerAdvice {
                 null
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleInvalidEmailFormat(InvalidEmailFormatException exception) {
+        Problem problem = new Problem(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Email Format",
+                exception.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
     }
 }

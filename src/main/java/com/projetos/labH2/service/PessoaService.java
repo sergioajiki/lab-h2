@@ -1,5 +1,6 @@
 package com.projetos.labH2.service;
 
+import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
@@ -32,6 +33,9 @@ public class PessoaService {
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
         boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
+        if(!isEmail) {
+            throw new InvalidEmailFormatException("Formato de email inválido");
+        }
         pessoaDao.insertPessoa(pessoa);
     }
 
@@ -46,11 +50,15 @@ public class PessoaService {
 
     // Método para atualizar uma pessoa
     public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
+        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
+        if(!isEmail) {
+            throw new InvalidEmailFormatException("Formato de email inválido");
+        }
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
-        pessoa.setId(id);
+        pessoa.setId(id); // Confirma que o id seja atualizado corretamente
         pessoaDao.updatePessoaById(pessoa);
         return pessoa;
     }
