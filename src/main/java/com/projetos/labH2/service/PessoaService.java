@@ -37,19 +37,21 @@ public class PessoaService {
 
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
-        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
-        if (!isEmail) {
-            throw new InvalidEmailFormatException("Formato de email inválido");
-        }
+//        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
+//        if (!isEmail) {
+//            throw new InvalidEmailFormatException("Formato de email inválido");
+//        }
+        validarEmail(pessoa.getEmail());
         pessoaDao.insertPessoa(pessoa);
     }
 
     // Método para atualizar uma pessoa
     public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
-        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
-        if (!isEmail) {
-            throw new InvalidEmailFormatException("Formato de email inválido");
-        }
+//        boolean isEmail = EmailValidator.isValidEmail(pessoa.getEmail());
+//        if (!isEmail) {
+//            throw new InvalidEmailFormatException("Formato de email inválido");
+//        }
+        validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
@@ -66,5 +68,11 @@ public class PessoaService {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
         pessoaDao.deletePessoaById(id);
+    }
+
+    private void validarEmail(String email){
+        if(!EmailValidator.isValidEmail(email)){
+            throw new InvalidEmailFormatException("Formato de email inválido");
+        }
     }
 }
