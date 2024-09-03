@@ -7,24 +7,24 @@
 
     <!-- Mapeamento para o método insertPessoa -->
     <insert id="insertPessoa" parameterType="PessoaVo">
-        INSERT INTO h2dev.pessoa (nome, idade, email)
-        VALUES (#{nome}, #{idade}, #{email})
+        INSERT INTO h2dev.pessoa (nome, idade, email, data_nascimento)
+        VALUES (#{nome}, #{idade}, #{email}, #{data_nascimento})
     </insert>
 
     <!-- Mapeamento para o método getAllPessoas -->
     <select id="getAllPessoas" resultType="PessoaVo">
-        SELECT id, nome, idade, email FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
     <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">
-        SELECT id, nome, idade, email FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
         WHERE id= #{id}
     </select>
 
     <!-- Mapeamento para o método getPessoaByNome -->
     <select id="getPessoaByNome" parameterType="string" resultType="PessoaVo">
-        SELECT id, nome, idade, email FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
         WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
     </select>
 
@@ -37,7 +37,7 @@
     <!-- Mapeamento para o método updatePessoaById -->
     <update id="updatePessoaById" parameterType="PessoaVo">
         UPDATE h2dev.pessoa
-        SET nome = #{nome}, idade = #{idade}, email = #{email}
+        SET nome = #{nome}, idade = #{idade}, email = #{email}, data_nascimento = #{data_nascimento}
         WHERE id = #{id}
     </update>
 
