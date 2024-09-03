@@ -16,5 +16,5 @@ public interface PessoaDao {
 
     void deletePessoaById(@Param("id") Long id);
 
-    PessoaVo updatePessoaById(PessoaVo pessoa);
+    void updatePessoaById(PessoaVo pessoa);
 }

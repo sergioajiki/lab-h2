@@ -50,7 +50,6 @@ public class PessoaService {
         }
         pessoa.setId(id);
         pessoaDao.updatePessoaById(pessoa);
-
         return pessoa;
     }
 }

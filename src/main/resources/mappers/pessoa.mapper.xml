@@ -17,13 +17,13 @@
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
-    <select id="getPessoaById" parameterType="int" resultType="PessoaVo">
+    <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">
         SELECT id, nome, idade, email FROM h2dev.pessoa
         WHERE id= #{id}
     </select>
 
     <!-- Mapeamento para o método deletePessoaById -->
-    <delete id="deletePessoaById" parameterType="int">
+    <delete id="deletePessoaById" parameterType="Long">
         DELETE FROM h2dev.pessoa
         WHERE id = #{id}
     </delete>
