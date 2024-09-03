@@ -57,6 +57,6 @@ public class PessoaController {
     @Operation(description = "Atualiza o resgistro da pessoa selecionada por id")
     public ResponseEntity<String> updatePessoa(@PathVariable Long id, @RequestBody @Valid PessoaVo pessoa) {
         PessoaVo pessoaUpdatedById = pessoaService.updatePessoaById(id, pessoa);
-        return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoa.getNome() + " atualizada com sucesso!");
+        return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoa.getId() + " atualizada com sucesso!");
     }
 }
