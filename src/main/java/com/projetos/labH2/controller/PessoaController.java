@@ -28,6 +28,13 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(allPessoa);
     }
 
+    @GetMapping("/buscarPorNome")
+    @Operation(description = "Busca uma lista de pessoa por nome")
+    public ResponseEntity<List<PessoaVo>> getPessoaByNome(@RequestParam String nome){
+        List<PessoaVo> pessoaByNome = pessoaService.getPessoaByNome(nome);
+        return ResponseEntity.status(HttpStatus.OK).body(pessoaByNome);
+    }
+
     // Endpoint para buscar uma pessoa pelo ID
     @GetMapping("/{id}")
     @Operation(description = "Busca uma pessoa selecionada por id")
@@ -44,19 +51,19 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Pessoa cadastrada com sucesso");
     }
 
-    // Endpoint para apagar uma pessoa pelo ID
-    @DeleteMapping("/{id}")
-    @Operation(description = "Apaga o registro da pessoa selecionada por id")
-    public ResponseEntity<String> deletarPessoa(@PathVariable Long id) {
-        pessoaService.deletarPessoaById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Pessoa com o id " + id + " apagada com sucesso!");
-    }
-
     // Endpoint para atualizar uma pessoa pelo ID
     @PutMapping("/{id}")
     @Operation(description = "Atualiza o resgistro da pessoa selecionada por id")
     public ResponseEntity<String> updatePessoa(@PathVariable Long id, @RequestBody @Valid PessoaVo pessoa) {
         PessoaVo pessoaUpdatedById = pessoaService.updatePessoaById(id, pessoa);
         return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoa.getId() + " atualizada com sucesso!");
+    }
+
+    // Endpoint para apagar uma pessoa pelo ID
+    @DeleteMapping("/{id}")
+    @Operation(description = "Apaga o registro da pessoa selecionada por id")
+    public ResponseEntity<String> deletarPessoa(@PathVariable Long id) {
+        pessoaService.deletarPessoaById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Pessoa com o id " + id + " apagada com sucesso!");
     }
 }

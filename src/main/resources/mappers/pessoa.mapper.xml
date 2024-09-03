@@ -22,6 +22,12 @@
         WHERE id= #{id}
     </select>
 
+    <!-- Mapeamento para o método getPessoaByNome -->
+    <select id="getPessoaByNome" parameterType="string" resultType="PessoaVo">
+        SELECT id, nome, idade, email FROM h2dev.pessoa
+        WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
+    </select>
+
     <!-- Mapeamento para o método deletePessoaById -->
     <delete id="deletePessoaById" parameterType="Long">
         DELETE FROM h2dev.pessoa
