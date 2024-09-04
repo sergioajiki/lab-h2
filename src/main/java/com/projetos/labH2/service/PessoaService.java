@@ -62,7 +62,7 @@ public class PessoaService {
         normalizarDados(pessoa);
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
         pessoa.setId(id); // Confirma que o id seja atualizado corretamente
-        pessoaDao.updatePessoaById(id, pessoa);
+        pessoaDao.updatePessoaById(pessoa);
         return pessoa;
     }
 
