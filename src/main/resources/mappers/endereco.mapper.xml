@@ -24,6 +24,7 @@
         WHERE id = #{id}
     </select>
 
+    <!-- Mapeamento para o método updateEnderecoById -->
     <update id="updateEnderecoById" parameterType="EnderecoVo">
         UPDATE h2dev.endereco
         SET logradouro = #{logradouro}, numero = #{numero}, complemento = #{complemento},
@@ -31,8 +32,9 @@
         WHERE id = #{id}
     </update>
 
+    <!-- Mapeamento para o método deleteEnderecoById -->
     <delete id="deleteEnderecoById" parameterType="Long">
-        DELETE FROM h2dev
+        DELETE FROM h2dev.endereco
         WHERE id = #{id}
     </delete>
 
