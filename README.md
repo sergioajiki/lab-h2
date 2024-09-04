@@ -16,6 +16,9 @@ A documentação da API está disponível via Swagger na seguinte URL:
 ### **GET /pessoa/buscaPorNome**
 - **Descrição:** Busca uma lista de pessoas selecionadas por nome.
 - **Parametro:** "nome" (query parameter)
+### **GET /pessoa/buscaPorDataNascimentoRange**
+- **Descrição:** Busca uma lista de pessoas por intervalo de data de nascimento.
+- **Parametro:** "dataInicio, dataFim" (query parameter)
 ### **POST /pessoa/cadastrar**
 - **Descrição:** Cadastra uma nova pessoa.
 ### **PUT /pessoa/{id}**
