@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projetos.labH2.labDAO.EnderecoDao">
+
+    <!-- Mapeamento para o método insertEndereco -->
+    <insert id="insertEndereco" parameterType="EnderecoVo">
+        INSERT INTO h2dev.endereco (logradouro, numero, complemento, bairro, cep, cidade, estado)
+        VALUES (#{logradouro}, #{numero}, #{complemento}, #{bairro}, #{cep}, #{cidade}, #{estado})
+    </insert>
+
+    <!-- Mapeamento para o método getAllEndereco -->
+    <select id="getAllEndereco" resultType="EnderecoVo">
+        SELECT id, logradouro, numero, complemento, bairro, cep, cidade, estado
+        FROM h2dev.endereco
+    </select>
+
+    <!-- Mapeamento para o método getEnderecoById -->
+    <select id="getEnderecoById" parameterType="Long" resultType="EnderecoVo">
+        SELECT id, logradouro, numero, complemento, bairro, cep, cidade, estado
+        FROM h2dev.endereco
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateEnderecoById" parameterType="EnderecoVo">
+        UPDATE h2dev.endereco
+        SET logradouro = #{logradouro}, numero = #{numero}, complemento = #{complemento},
+        bairro = #{bairro}, cep = #{cep}, cidade = #{cidade}, estado = #{estado}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteEnderecoById" parameterType="Long">
+        DELETE FROM h2dev
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
