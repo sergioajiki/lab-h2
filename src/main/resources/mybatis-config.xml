@@ -8,11 +8,13 @@
     <typeAliases>
         <!-- Alias para simplificar o uso do VO -->
         <typeAlias alias="PessoaVo" type="com.projetos.labH2.labVO.PessoaVo"/>
+        <typeAlias alias="EnderecoVo" type="com.projetos.labH2.labDAO.EnderecoDao"/>
     </typeAliases>
 
     <mappers>
-        <!-- Mapeador do PessoaDao -->
+        <!-- Registra o mapeamento XML dos arquivos DAOs -->
         <mapper resource="mappers/pessoa.mapper.xml"/>
+        <mapper resource="mappers/endereco.mapper.xml"/>
     </mappers>
 
 </configuration>
