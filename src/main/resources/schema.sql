@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS endereco (
     complemento VARCHAR(255),
     bairro VARCHAR(255),
     cep VARCHAR(255) NOT NULL,
-    cidade VARCHAR(255 NOT NULL),
+    cidade VARCHAR(255) NOT NULL,
     estado VARCHAR(2) NOT NULL -- Estado em formato de sigla
 );
 
