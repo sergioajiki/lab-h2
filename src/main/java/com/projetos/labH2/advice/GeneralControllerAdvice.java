@@ -95,11 +95,11 @@ public class GeneralControllerAdvice {
     @ExceptionHandler
     public ResponseEntity<Problem> handleDateTimeParseException(DateTimeParseException exception) {
         Problem problem = new Problem(
-                HttpStatus.CONFLICT.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 "Formato de data inválido",
                 exception.getMessage(),
                 null
         );
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
     }
 }

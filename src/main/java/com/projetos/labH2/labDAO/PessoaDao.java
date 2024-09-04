@@ -14,9 +14,13 @@ public interface PessoaDao {
 
     List<PessoaVo> getPessoaByNome(@Param("nome") String nome);
 
+    List<PessoaVo> getPessoaByDataNascimentoRange(@Param("dataInicio")String dataInicio,@Param("dataFim") String dataFim);
+
     PessoaVo getPessoaById(@Param("id") Long id);
 
     void updatePessoaById(PessoaVo pessoa);
 
     void deletePessoaById(@Param("id") Long id);
+
+
 }

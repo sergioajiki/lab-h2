@@ -13,26 +13,30 @@
 
     <!-- Mapeamento para o método getAllPessoas -->
     <select id="getAllPessoas" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento
+        FROM h2dev.pessoa
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
     <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento
+        FROM h2dev.pessoa
         WHERE id= #{id}
     </select>
 
     <!-- Mapeamento para o método getPessoaByNome -->
     <select id="getPessoaByNome" parameterType="string" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento FROM h2dev.pessoa
+        SELECT id, nome, idade, email, data_nascimento
+        FROM h2dev.pessoa
         WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
     </select>
 
-    <!-- Mapeamento para o método deletePessoaById -->
-    <delete id="deletePessoaById" parameterType="Long">
-        DELETE FROM h2dev.pessoa
-        WHERE id = #{id}
-    </delete>
+    <!-- Mapeamento para o método getPessoaByDataNascimentoRange -->
+    <select id="getPessoaByDataNascimentoRange" resultType="PessoaVo">
+        SELECT id, nome, idade, email, data_nascimento
+        FROM h2dev.pessoa
+        WHERE data_nascimento BETWEEN #{dataInicio} AND #{dataFim}
+    </select>
 
     <!-- Mapeamento para o método updatePessoaById -->
     <update id="updatePessoaById" parameterType="PessoaVo">
@@ -40,5 +44,11 @@
         SET nome = #{nome}, idade = #{idade}, email = #{email}, data_nascimento = #{data_nascimento}
         WHERE id = #{id}
     </update>
+
+    <!-- Mapeamento para o método deletePessoaById -->
+    <delete id="deletePessoaById" parameterType="Long">
+        DELETE FROM h2dev.pessoa
+        WHERE id = #{id}
+    </delete>
 
 </mapper>

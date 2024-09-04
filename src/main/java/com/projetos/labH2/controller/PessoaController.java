@@ -30,7 +30,7 @@ public class PessoaController {
 
     @GetMapping("/buscarPorNome")
     @Operation(description = "Busca uma lista de pessoa por nome")
-    public ResponseEntity<List<PessoaVo>> getPessoaByNome(@RequestParam String nome){
+    public ResponseEntity<List<PessoaVo>> getPessoaByNome(@RequestParam String nome) {
         List<PessoaVo> pessoaByNome = pessoaService.getPessoaByNome(nome);
         return ResponseEntity.status(HttpStatus.OK).body(pessoaByNome);
     }
@@ -41,6 +41,14 @@ public class PessoaController {
     public ResponseEntity<PessoaVo> getPessoaById(@PathVariable Long id) {
         PessoaVo pessoaById = pessoaService.getPessoaById(id);
         return ResponseEntity.status(HttpStatus.OK).body(pessoaById);
+    }
+
+    // Endpoint exibir uma lista com pessoas por intervalo de data de nascimento
+    @GetMapping("/buscarPessoasPorDataNascimento")
+    @Operation(description = "Lista pessoas por intervalo de data de nascimento")
+    public ResponseEntity<List<PessoaVo>> getPessoaByDataNascimentoRange(@RequestParam String dataInicio, @RequestParam String dataFim) {
+        List<PessoaVo> pessoaFound = pessoaService.getPessoaByDataNascimentoRange(dataInicio, dataFim);
+        return ResponseEntity.status(HttpStatus.OK).body(pessoaFound);
     }
 
     // Endpoint para cadastrar uma pessoa

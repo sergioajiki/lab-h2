@@ -36,11 +36,19 @@ public class PessoaService {
         return pessoaOptional.get();
     }
 
+    //Método para obter uma lista com pessoas por intervalo de data de nascimento
+    public List<PessoaVo> getPessoaByDataNascimentoRange(String dataInicio, String dataFim) {
+        // Converte as datas para o formato yyyy-MM-dd
+        String dataInicioConvertida = FormatDateUtil.converterParaFormatoYYYYMMDD(dataInicio);
+        String dataFimConvertida = FormatDateUtil.converterParaFormatoYYYYMMDD(dataFim);
+        return pessoaDao.getPessoaByDataNascimentoRange(dataInicioConvertida, dataFimConvertida);
+    }
+
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         normalizarDados(pessoa);
-        dataNascimentoFormatoBanco(pessoa);
+        pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
         pessoaDao.insertPessoa(pessoa);
     }
 
@@ -52,6 +60,7 @@ public class PessoaService {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
         normalizarDados(pessoa);
+        pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
         pessoa.setId(id); // Confirma que o id seja atualizado corretamente
         pessoaDao.updatePessoaById(pessoa);
         return pessoa;
@@ -67,11 +76,12 @@ public class PessoaService {
     }
 
     // Método para validar o formato do Email
-    private void validarEmail(String email){
-        if(!EmailValidator.isValidEmail(email)){
+    private void validarEmail(String email) {
+        if (!EmailValidator.isValidEmail(email)) {
             throw new InvalidEmailFormatException("Formato de email inválido");
         }
     }
+
     // Método para converter para minúsculas
     private void normalizarDados(PessoaVo pessoa) {
         pessoa.setNome(pessoa.getNome().toLowerCase());
@@ -79,8 +89,8 @@ public class PessoaService {
     }
 
     // Método para converter data_nascimento para o formato yyyy-MM-dd para o registro no banco'
-    private void dataNascimentoFormatoBanco(PessoaVo pessoa){
-        String dataFormatada = FormatDateUtil.converterParaFormatoYYYYMMDD(pessoa.getData_nascimento());
-        pessoa.setData_nascimento(dataFormatada);
+    private String dataNascimentoFormatoBanco(String data) {
+        String dataFormatada = FormatDateUtil.converterParaFormatoYYYYMMDD(data);
+        return dataFormatada;
     }
 }
