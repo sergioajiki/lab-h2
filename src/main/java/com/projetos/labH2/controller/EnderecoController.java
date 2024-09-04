@@ -15,6 +15,7 @@ import java.util.List;
 @Tag(name = "Endereços")
 @RequestMapping("/endereco")
 public class EnderecoController {
+
     @Autowired
     private EnderecoService enderecoService;
 

@@ -8,7 +8,7 @@
     <typeAliases>
         <!-- Alias para simplificar o uso do VO -->
         <typeAlias alias="PessoaVo" type="com.projetos.labH2.labVO.PessoaVo"/>
-        <typeAlias alias="EnderecoVo" type="com.projetos.labH2.labDAO.EnderecoDao"/>
+        <typeAlias alias="EnderecoVo" type="com.projetos.labH2.labVO.EnderecoVo"/>
     </typeAliases>
 
     <mappers>
