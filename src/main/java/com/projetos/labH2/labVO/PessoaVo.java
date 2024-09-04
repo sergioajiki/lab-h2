@@ -20,4 +20,5 @@ public class PessoaVo {
     @NotNull(message = "O campo data_nascimento é obrigatório")
     private String data_nascimento;
 
+    private EnderecoVo endereco;
 }
