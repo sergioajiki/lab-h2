@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CepValidator {
-    private static final String CEP_REGEX = "^[0-9]{5}-[0-9]{3}$";
+    private static final String CEP_REGEX = "^\\d{8}$";
     private static final Pattern pattern = Pattern.compile(CEP_REGEX);
 
     public static boolean isValidCep(String cep) {

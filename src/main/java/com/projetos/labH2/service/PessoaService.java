@@ -4,7 +4,6 @@ import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
-import com.projetos.labH2.util.CepValidator;
 import com.projetos.labH2.util.EmailValidator;
 import com.projetos.labH2.util.FormatDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,13 +80,6 @@ public class PessoaService {
     private void validarEmail(String email) {
         if (!EmailValidator.isValidEmail(email)) {
             throw new InvalidEmailFormatException("Formato de email inválido");
-        }
-    }
-
-    // Método para validar o formato do CEP
-    private void validarCep(String cep){
-        if(!CepValidator.isValidCep(cep)){
-            throw new RuntimeException("");
         }
     }
 

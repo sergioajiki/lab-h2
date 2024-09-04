@@ -1,5 +1,6 @@
 package com.projetos.labH2.advice;
 
+import com.projetos.labH2.advice.exceptions.InvalidCepException;
 import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,17 @@ public class GeneralControllerAdvice {
         Problem problem = new Problem(
                 HttpStatus.BAD_REQUEST.value(),
                 "Invalid Email Format",
+                exception.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleInvalidCepException(InvalidCepException exception) {
+        Problem problem = new Problem(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Cep Format",
                 exception.getMessage(),
                 null
         );

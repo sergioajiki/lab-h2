@@ -13,6 +13,7 @@ public class EnderecoVo {
     private String complemento;
     private String bairro;
     @NotEmpty(message = "O campo cep é obrigatório")
+    @Size(min = 8, max = 8, message = "Cep inválido, deve conter exatamente 8 caracteres")
     private String cep;
     @NotEmpty(message = "O campo cidade é obrigatório")
     private String cidade;
