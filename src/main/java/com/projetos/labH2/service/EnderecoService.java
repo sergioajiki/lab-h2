@@ -24,7 +24,8 @@ public class EnderecoService {
         return enderecoDao.getEnderecoById(id);
     }
     public EnderecoVo updateEnderecoById(Long id, EnderecoVo endereco){
-        enderecoDao.updateEnderecoById(id, endereco);
+        endereco.setId(id);
+        enderecoDao.updateEnderecoById(endereco);
         return endereco;
     }
 

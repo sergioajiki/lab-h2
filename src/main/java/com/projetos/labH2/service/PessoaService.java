@@ -8,6 +8,7 @@ import com.projetos.labH2.util.EmailValidator;
 import com.projetos.labH2.util.FormatDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ public class PessoaService {
     }
 
     // Método para atualizar uma pessoa
-    public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
+    public PessoaVo updatePessoaById(@RequestParam Long id, PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
