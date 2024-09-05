@@ -1,5 +1,6 @@
 package com.projetos.labH2.advice;
 
+import com.projetos.labH2.advice.exceptions.DuplicateEntryException;
 import com.projetos.labH2.advice.exceptions.InvalidCepException;
 import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
@@ -76,6 +77,17 @@ public class GeneralControllerAdvice {
         Problem problem = new Problem(
                 HttpStatus.CONFLICT.value(),
                 "Violação de índice exclusivo ou chave primária",
+                exception.getMessage(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(problem);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Problem> handleDuplicateEntryException(DuplicateEntryException exception) {
+        Problem problem = new Problem(
+                HttpStatus.CONFLICT.value(),
+                "Informações de entrada duplicadas",
                 exception.getMessage(),
                 null
         );

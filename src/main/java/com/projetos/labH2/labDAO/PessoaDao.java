@@ -18,6 +18,8 @@ public interface PessoaDao {
 
     PessoaVo getPessoaById(@Param("id") Long id);
 
+    PessoaVo getPessoaByEmail(String email);
+
     void updatePessoaById(PessoaVo pessoa);
 
     void deletePessoaById(@Param("id") Long id);

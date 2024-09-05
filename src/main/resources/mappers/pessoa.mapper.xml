@@ -51,7 +51,7 @@
     </select>
 
     <!-- Mapeamento para o método getPessoaByNome -->
-    <select id="getPessoaByNome" parameterType="string" resultType="PessoaVo">
+    <select id="getPessoaByNome" parameterType="String" resultType="PessoaVo">
         SELECT id, nome, idade, email, data_nascimento
         FROM h2dev.pessoa
         WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
@@ -62,6 +62,14 @@
         SELECT id, nome, idade, email, data_nascimento
         FROM h2dev.pessoa
         WHERE data_nascimento BETWEEN #{dataInicio} AND #{dataFim}
+    </select>
+
+    <select id="getPessoaByEmail" parameterType="String" resultMap="PessoaResultMap">
+        SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        FROM h2dev.pessoa p
+        LEFT JOIN endereco e ON p.id_endereco = e.id
+        WHERE p.email= #{email}
     </select>
 
     <!-- Mapeamento para o método updatePessoaById -->

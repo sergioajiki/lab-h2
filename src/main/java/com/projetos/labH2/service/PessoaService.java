@@ -1,5 +1,6 @@
 package com.projetos.labH2.service;
 
+import com.projetos.labH2.advice.exceptions.DuplicateEntryException;
 import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.PessoaDao;
@@ -45,9 +46,22 @@ public class PessoaService {
         return pessoaDao.getPessoaByDataNascimentoRange(dataInicioConvertida, dataFimConvertida);
     }
 
+    // Método para obter uma pessoa pelo email
+    public PessoaVo getPessoaByEmail(String email) {
+        var pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaByEmail(email.toLowerCase()));
+        if (pessoaOptional.isEmpty()) {
+            throw new NotFoundException(String.format("Pessoa com email %s não encontrado", email));
+        }
+        return pessoaOptional.get();
+    }
+
     // Método para cadastrar uma pessoa
     public void cadastrarPessoa(PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
+        Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
+        if(pessoaOptional.isPresent()){
+            throw new DuplicateEntryException(String.format("Email %s já está registrado", pessoa.getEmail()));
+        }
         normalizarDados(pessoa);
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
         pessoaDao.insertPessoa(pessoa);
