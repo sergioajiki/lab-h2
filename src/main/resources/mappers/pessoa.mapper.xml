@@ -7,6 +7,7 @@
 
     <resultMap id="PessoaResultMap" type="PessoaVo">
         <id property="id" column="id"/>
+        <result property="id" column="id"/>
         <result property="nome" column="nome"/>
         <result property="idade" column="idade"/>
         <result property="email" column="email"/>
@@ -36,17 +37,9 @@
         e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
         FROM h2dev.pessoa p
         LEFT JOIN endereco e ON p.id_endereco = e.id
-        <!--        SELECT id, nome, idade, email, data_nascimento-->
-        <!--        FROM h2dev.pessoa-->
-
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
-    <!--    <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">-->
-    <!--        SELECT id, nome, idade, email, data_nascimento-->
-    <!--        FROM h2dev.pessoa-->
-    <!--        WHERE id= #{id}-->
-    <!--    </select>-->
     <select id="getPessoaById" parameterType="Long" resultMap="PessoaResultMap">
         SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
         e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
@@ -65,10 +58,12 @@
     </select>
 
     <!-- Mapeamento para o método getPessoaByDataNascimentoRange -->
-    <select id="getPessoaByDataNascimentoRange" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento
-        FROM h2dev.pessoa
-        WHERE data_nascimento BETWEEN #{dataInicio} AND #{dataFim}
+    <select id="getPessoaByDataNascimentoRange" resultMap="PessoaResultMap">
+        SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        FROM h2dev.pessoa p
+        LEFT JOIN endereco e ON p.id_endereco = e.id
+        WHERE p.data_nascimento BETWEEN #{dataInicio} AND #{dataFim}
     </select>
 
     <select id="getPessoaByEmail" parameterType="String" resultMap="PessoaResultMap">
@@ -82,7 +77,8 @@
     <!-- Mapeamento para o método updatePessoaById -->
     <update id="updatePessoaById" parameterType="PessoaVo">
         UPDATE h2dev.pessoa
-        SET nome = #{nome}, idade = #{idade}, email = #{email}, data_nascimento = #{data_nascimento}
+        SET nome = #{nome}, idade = #{idade}, email = #{email},
+        data_nascimento = #{data_nascimento}, id_endereco = #{endereco.id}
         WHERE id = #{id}
     </update>
 
