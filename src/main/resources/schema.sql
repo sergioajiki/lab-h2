@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS pessoa (
     nome VARCHAR(255) NOT NULL,
     idade INT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    data_nascimento DATE NOT NULL
-    id_endereco INT,
+    data_nascimento DATE NOT NULL,
+    id_endereco INT NULL,
     CONSTRAINT fk_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id) ON DELETE SET NULL
-
 );

@@ -6,13 +6,14 @@
 <mapper namespace="com.projetos.labH2.labDAO.PessoaDao">
 
     <resultMap id="PessoaResultMap" type="PessoaVo">
-        <id property="id" column="id" />
+        <id property="id" column="id"/>
         <result property="nome" column="nome"/>
         <result property="idade" column="idade"/>
         <result property="email" column="email"/>
         <result property="data_nascimento" column="data_nascimento"/>
         <association property="endereco" javaType="EnderecoVo">
             <id property="id" column="id_endereco>"/>
+            <result property="id" column="id_endereco"/>
             <result property="logradouro" column="logradouro"/>
             <result property="numero" column="numero"/>
             <result property="complemento" column="complemento"/>
@@ -25,8 +26,8 @@
 
     <!-- Mapeamento para o método insertPessoa -->
     <insert id="insertPessoa" parameterType="PessoaVo">
-        INSERT INTO h2dev.pessoa (nome, idade, email, data_nascimento)
-        VALUES (#{nome}, #{idade}, #{email}, #{data_nascimento})
+        INSERT INTO h2dev.pessoa (nome, idade, email, data_nascimento, id_endereco)
+        VALUES (#{nome}, #{idade}, #{email}, #{data_nascimento}, #{endereco.id})
     </insert>
 
     <!-- Mapeamento para o método getAllPessoas -->
@@ -36,14 +37,14 @@
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
-<!--    <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">-->
-<!--        SELECT id, nome, idade, email, data_nascimento-->
-<!--        FROM h2dev.pessoa-->
-<!--        WHERE id= #{id}-->
-<!--    </select>-->
+    <!--    <select id="getPessoaById" parameterType="Long" resultType="PessoaVo">-->
+    <!--        SELECT id, nome, idade, email, data_nascimento-->
+    <!--        FROM h2dev.pessoa-->
+    <!--        WHERE id= #{id}-->
+    <!--    </select>-->
     <select id="getPessoaById" parameterType="Long" resultMap="PessoaResultMap">
         SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
-        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+               e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
         FROM h2dev.pessoa p
         LEFT JOIN endereco e ON p.id_endereco = e.id
         WHERE p.id= #{id}
