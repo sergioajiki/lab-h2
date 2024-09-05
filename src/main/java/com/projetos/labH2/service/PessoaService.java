@@ -5,7 +5,9 @@ import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.EnderecoDao;
 import com.projetos.labH2.labDAO.PessoaDao;
+import com.projetos.labH2.labVO.EnderecoVo;
 import com.projetos.labH2.labVO.PessoaVo;
+import com.projetos.labH2.labVO.RequestCadastroVo;
 import com.projetos.labH2.util.EmailValidator;
 import com.projetos.labH2.util.FormatDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class PessoaService {
     private PessoaDao pessoaDao;
     @Autowired
     private EnderecoDao enderecoDao;
+    @Autowired
+    private EnderecoService enderecoService;
 
     // Método para obter uma lista com todas as pessoas
     public List<PessoaVo> getAllPessoas() {
@@ -55,6 +59,29 @@ public class PessoaService {
             throw new NotFoundException(String.format("Pessoa com email %s não encontrado", email));
         }
         return pessoaOptional.get();
+    }
+    // Método para cadastrar uma pessoa com o endereço
+    public void registrarPessoaAndEndereco(RequestCadastroVo infoForRegister) {
+        EnderecoVo endereco = new EnderecoVo();
+        endereco.setLogradouro(infoForRegister.getLogradouro());
+        endereco.setNumero(infoForRegister.getNumero());
+        endereco.setComplemento(infoForRegister.getComplemento());
+        endereco.setBairro(infoForRegister.getBairro());
+        endereco.setCep(infoForRegister.getCep());
+        endereco.setCidade(infoForRegister.getCidade());
+        endereco.setEstado(infoForRegister.getEstado());
+
+        enderecoService.cadastrarEndereco(endereco);
+
+
+        PessoaVo pessoa = new PessoaVo();
+        pessoa.setNome(infoForRegister.getNome());
+        pessoa.setIdade(infoForRegister.getIdade());
+        pessoa.setEmail(infoForRegister.getEmail().toLowerCase());
+        pessoa.setData_nascimento(infoForRegister.getData_nascimento());
+        pessoa.setEndereco(endereco);
+
+        cadastrarPessoa(pessoa);
     }
 
     // Método para cadastrar uma pessoa

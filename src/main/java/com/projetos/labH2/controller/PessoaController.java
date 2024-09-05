@@ -1,6 +1,7 @@
 package com.projetos.labH2.controller;
 
 import com.projetos.labH2.labVO.PessoaVo;
+import com.projetos.labH2.labVO.RequestCadastroVo;
 import com.projetos.labH2.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,8 +51,16 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaFound);
     }
 
-    // Endpoint para cadastrar uma pessoa
+    // Endpoint para cadastrar uma pessoa com endereço
     @PostMapping("/cadastrar")
+    @Operation(description = "Cadastra uma pessoa")
+    public ResponseEntity<String> cadastrarPessoaAndEndereco(@RequestBody @Valid RequestCadastroVo pessoa) {
+        pessoaService.registrarPessoaAndEndereco(pessoa);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Pessoa cadastrada com sucesso");
+    }
+
+    // Endpoint para cadastrar uma pessoa
+    @PostMapping("/cadastrarPessoa")
     @Operation(description = "Cadastra uma pessoa")
     public ResponseEntity<String> cadastrarPessoa(@RequestBody @Valid PessoaVo pessoa) {
         pessoaService.cadastrarPessoa(pessoa);
