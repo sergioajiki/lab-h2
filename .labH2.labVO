@@ -1,0 +1,414 @@
+[33mcommit 8bd9c8c4ce2644eac0bd20e56c9f43608978b4c4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Thu Sep 5 14:10:12 2024 -0400
+
+    feat: Adicionar RequestPessoaVo para melhorar a clareza e a organização do cadastro de pessoas
+
+[33mcommit 80adccda28b5e0779570997721cdefc345049063[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Thu Sep 5 13:08:27 2024 -0400
+
+    feat: corrigida a verificação para mesmo id no registro do endereço
+
+[33mcommit b13d754bc06a9c555ef75aa738b238537684fc0a[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Thu Sep 5 10:40:00 2024 -0400
+
+    feat: criada verificação para se ao tentar cadastrar uma pessoa com endereço com id inexistente lançar uma exception
+
+[33mcommit 55088abd6d0b0ed4ef7c2e633cacddd88ea1d9fe[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Thu Sep 5 09:08:23 2024 -0400
+
+    feat: adicionado validação para email duplicado no cadastro, criado uma DuplicateEntryException para deixar a resposta mais clara
+
+[33mcommit 0172cbb24f7d9c2d5f30dabe4df05c41ead7aada[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Thu Sep 5 08:28:27 2024 -0400
+
+    fix: a tabela endereco precisa ser preenchida antes da tabela pessoa devido a referencia do id, no arquivo schema.sql faltava uma virgula
+
+[33mcommit ec02e9c80f8b11337ec4ce97b5c03c2642455dd8[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 17:29:40 2024 -0400
+
+    feat: pessoa.mapper.xml resultmap
+
+[33mcommit 1609e12efd2b051c7b4e1ed3f6c71f32dea0aaae[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 17:14:03 2024 -0400
+
+    feat: alterando o schema.sql para referenicar as tabelas pessoa e endereco
+
+[33mcommit 48f82fbae785b87afe9c0e1d16464193abfb0adf[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 17:04:18 2024 -0400
+
+    feat: Validação para o Cep
+
+[33mcommit 173cb456c1dd17187726bfbec49daf5701f26b94[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 15:53:11 2024 -0400
+
+    feat: InvalidCepException
+
+[33mcommit 7cab3287e1311b1d6c0d342ce090f7a98568c450[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 15:45:59 2024 -0400
+
+    feat: CepValidator
+
+[33mcommit 2f2d5c81d5db054b472282327933b7b8d21029a1[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 15:36:15 2024 -0400
+
+    feat: adicionada validações em EnderecoVo
+
+[33mcommit 0935db4f3da84a77bf044049ddd5f07c1123ae35[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 14:37:02 2024 -0400
+
+    fix: corrigida a localização de EnderecoVo em mybatis-config, DataVerifier mostrar o registro de pessoas e endereços no inicio da aplicação
+
+[33mcommit 56352082f2a83b2777ce9464de8415b74ac3ebf1[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 14:03:36 2024 -0400
+
+    feat: EnderecoController criado sem as validações
+
+[33mcommit fc85b45c5d37f256e80a4271c190b7f06dc19352[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 13:06:15 2024 -0400
+
+    feat: EnderecoService ainda sem as validações
+
+[33mcommit b6eb10e53dea020afc1e12519b8af7c9abdb7fde[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 10:55:09 2024 -0400
+
+    feat: acrescento registros de endereço em data.sql
+
+[33mcommit 4c0ea347473f4c3d6153d7dc51e5f57959e760ef[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 10:43:21 2024 -0400
+
+    feat: mybatis-config.xml acrescenta mapeamento para endereco.mapper.xml e associa EnderecoVo a classe completa
+
+[33mcommit b8d6836fca46e45514b4b5c4d7e5de2d0a21efd5[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 10:33:07 2024 -0400
+
+    fix: corrido erro sintaxe em deleteEnderecoById
+
+[33mcommit 2994bc1f780cb4f5c5b38c5945d267c1c27bb0d5[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 10:29:30 2024 -0400
+
+    feat: endereco.mapper.xml
+
+[33mcommit f8a6f61d2eaa1e7486d2a9ac0ecf1f5dcb5adcc8[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 10:02:17 2024 -0400
+
+    feat: EnderecoVo interface com crud básico
+
+[33mcommit 62125df7d11862fc90f890387217a14a02a272fe[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 09:48:12 2024 -0400
+
+    feat:enderecoVo usando Lombok para reduzir verbosidade no codigo @Data gera getters and setters para todos os atributos
+
+[33mcommit e22f3c33e01a9f1136c0e3d3c246fa6b9cf63e61[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 09:24:04 2024 -0400
+
+    feat: adicionado tabela endereco em schema.sql
+
+[33mcommit 2fcc79ff3b9195754dd246e7dd8996b38bd79699[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 08:40:43 2024 -0400
+
+    docs: atualização do README.md
+
+[33mcommit 468c1192a30ff0bef6225c2b22ae0494c671f9f4[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Wed Sep 4 08:34:50 2024 -0400
+
+    feat: getPessoaByDataNascimentoRange busca lista de pessoas por intervalo de data de nascimento
+
+[33mcommit c683faaf1f06301ac3761b795e2cd7325836ca6b[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 17:09:16 2024 -0400
+
+    feat: DateTimeParseException
+
+[33mcommit 7df0adc8659a97c5bc89f26e621d1b67f08bf40c[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 16:25:04 2024 -0400
+
+    feat: dataNascimentoFormatoBanco recebe uma data no formato dd/MM/yyyy e retorna o yyyy-MM-dd para registro no banco h2
+
+[33mcommit 20789f38885c84a055d30be7d6033fb4c57ef392[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 15:58:42 2024 -0400
+
+    feat: Adicionar FormatDateUtil para normalização de datas no formato yyyy-MM-dd para o banco de dados H2
+
+[33mcommit 8184e3ddcead15bebf9bbabc661f8ab6ca14ddd6[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 15:40:48 2024 -0400
+
+    feat: schema.sql foi acrescentado a coluna data_nascimento
+
+[33mcommit 4345bc4c18b6ff672d76e04fc429d41e35d97b0e[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 14:57:23 2024 -0400
+
+    docs: alteração do README.MD
+
+[33mcommit a9146cc918f0e08d74abab9d5bd08036f257aac7[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 13:44:59 2024 -0400
+
+    style: removendo espações em branco e código comentado
+
+[33mcommit b0dd49108e1ae2d77c1debb116950b49e30794fe[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 13:31:06 2024 -0400
+
+    feat:normalizer dados para gravar o banco em lowercase
+
+[33mcommit ce79c80a5f407c0239153555776b62aa8c4e9c45[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 13:16:55 2024 -0400
+
+    refactor: metodo validarEmail para reduzir o codigo
+
+[33mcommit d19b2130d4c622f26f78f759e7768e6637686f64[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 12:54:06 2024 -0400
+
+    feat: getPessoaByName
+
+[33mcommit b78c2c13a195907378e33b4f43f93cd372584ea1[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 10:00:47 2024 -0400
+
+    feat: cadastrarPessoa e updatePessoa fazem verificação de formato de email antes do registro no banco
+
+[33mcommit 71f1b1fdfa9cc9501814fda8bb26d25f1de60ad8[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 09:28:37 2024 -0400
+
+    feat: InvalidEmailFormatException
+
+[33mcommit 794026e9358e656528962f4dd05e475c1a2586ea[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 09:15:57 2024 -0400
+
+    feat: EmailValidator
+
+[33mcommit bc7426c8f97f0bc6ff59416d30d1c5c3603296d2[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 09:00:44 2024 -0400
+
+    refactor: alterado o parameterType em delete, select para long - pessoaDao.updatePessoaById retorna void
+
+[33mcommit 09ad74ff43ef3cb9ae3017dfad7d9d2b8d5b60f1[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 08:27:06 2024 -0400
+
+    feat: handleDataIntegrityViolationException
+
+[33mcommit d6a591c2592ebe60bafe0bab81142fd36ccdabd2[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 08:01:24 2024 -0400
+
+    feat: schema.sql alterado para que email seja único
+
+[33mcommit 76380a83d47c5cbacaf432dfa64d206eac5d8d79[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Tue Sep 3 07:43:54 2024 -0400
+
+    feat: handleHttpMessageNotReadableException in GeneralControllerAdvice
+
+[33mcommit 643c180c37a92912dd30f1d20775e4fbbd05c481[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 17:30:51 2024 -0400
+
+    feat: MethodArgumentNotValidException in GeneralControllerAdvice
+
+[33mcommit ce878804f31dc6b49375bc0fc3016b077e206137[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 17:17:00 2024 -0400
+
+    feat: adicionando validações para PessoaVo, foi alterado o formato int para Long no id
+
+[33mcommit 5f8985504228d42a942c7b595ac23dc0b326694d[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 16:18:52 2024 -0400
+
+    build: adicionado Hibernate-Validator
+
+[33mcommit 29f1c4b883b901513acee6a591cd4a76f6125e54[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 15:07:01 2024 -0400
+
+    feat: adicionando tratamento de exception para pessoa não encontrada no método getPessoaById
+
+[33mcommit 299b680d9a86e84b1aceb7e0df87892ad169cd02[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 14:37:15 2024 -0400
+
+    feat: GeneralControllerAdvice
+
+[33mcommit 9c58ea37c799e80d8ae26c4b667a3d1f41c3cabe[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 14:30:56 2024 -0400
+
+    feat: NotFoundException
+
+[33mcommit 077e172c21afb1fc8ece947545c263c597bc30bc[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 14:21:29 2024 -0400
+
+    feat: Problem criado para reprensentar erros em resposta http de forma mais legivel no formato json
+
+[33mcommit 7b8d4b21c36d7df2dcc27773ffd791850f7a1b86[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 14:06:36 2024 -0400
+
+    feat: ErrorMessageRecordVo
+
+[33mcommit 3d2e942e020a53ad08c40013f8109386f84dfcfa[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 11:02:38 2024 -0400
+
+    refactor: alterando para ResponseEntity
+
+[33mcommit 923a1ccfe6a951026f72ab76723561fc15f8882a[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 10:10:10 2024 -0400
+
+    feat: método para fazer atualização em uma pessoa selecionada por id
+
+[33mcommit 937adbf6329071b6310d568e33efd502eccf3c62[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 08:01:30 2024 -0400
+
+    refactor: adicionando informações para documentação da api pelo swagger
+
+[33mcommit e53295abd3e4714dfd32060acd53baa231b7b283[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Mon Sep 2 07:52:45 2024 -0400
+
+    build: adicionado dependencia sprigdoc para configurar o swagger
+
+[33mcommit c42efbca1c467747d4f5a2aa608bb987f43336ce[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 17:14:21 2024 -0400
+
+    deletemapping não é lido pelo navegador, utilizando metodo getmapping até configurar swagger
+
+[33mcommit faa1f5b762a2d54a2e74b79ceaba7d90929568f8[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 16:39:35 2024 -0400
+
+    feat: deletePessoaById adicionado na Service e Controller
+
+[33mcommit f24f1584bf61818d893236ce9e84b2a7ec0092ed[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 16:31:30 2024 -0400
+
+    feat<pessoa.mapper>: adicionado deletePessoaById
+
+[33mcommit bf52deb3463f7bf401c277a62b018d0d103bb86d[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 16:22:53 2024 -0400
+
+    feat<PessoaController: cadastrarPessoa
+
+[33mcommit 9fdc480feff58b71b69676d7ecf43716b4ec5c16[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 16:16:31 2024 -0400
+
+    feat<PessoaService>: cadastrarPessoa
+
+[33mcommit ee824599fd52faaec0b25b0c36f705f782c79a95[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 16:13:51 2024 -0400
+
+    feat<PessoaController>: getAllPessoas
+
+[33mcommit da11e859eb096371b6b2e490563957d19fa3009f[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 15:52:50 2024 -0400
+
+    feat: PessoaController
+
+[33mcommit 91cd9d1d9b962ec3f9f3c73ae871360ba46dadb6[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 15:45:55 2024 -0400
+
+    feat: PessoaService
+
+[33mcommit 1c05ef1ee599a665ccd0e47d5219dd752c8970d0[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 15:01:43 2024 -0400
+
+    feat: getPessoaByid in pessoa.mapper.xml
+
+[33mcommit 32c4f1ba9c77883f0fc0bf825558e2edd1fce685[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 14:09:23 2024 -0400
+
+    feat: acrescentado em DatabaseVerifier @Component para ser gerenciado Spring para que seja iniciado automaticamente
+
+[33mcommit 9a6ea02cad7d1206ee35fa80e0bd617b915baeea[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 14:04:37 2024 -0400
+
+    feat: DatabaseVerifier criado para verificar se o banco foi criado com sucesso - foi feita uma alteração no arq PessoaDao acrescentando annotation Mapper
+
+[33mcommit f17ff1b76ab3e8348f35c17a126d63483e625647[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 13:55:35 2024 -0400
+
+    feat: alterações no application.properties para configurar o mybatis
+
+[33mcommit aa4f3814b6b62b8f8b3472fcaf6000cb2fd8bcfb[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 13:47:31 2024 -0400
+
+    feat: pessoa.mapper.xml
+
+[33mcommit 098bdb89deed04e958c95be7cf32833691729892[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 13:38:47 2024 -0400
+
+    feat: mybatis-config.xml
+
+[33mcommit 0d77f0b3a0b14c23d6fcf3ce6a15d9701173b61c[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 13:22:29 2024 -0400
+
+    feat: PessoaDao
+
+[33mcommit b3eb515e5ed0d93a5fd98128132d2b6921bfa327[m
+Merge: 9579e2f 2c8f9f3
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 13:10:56 2024 -0400
+
+    feat: criando pessoaVO
+
+[33mcommit 9579e2fef619b153e7d9b9adb00125d046123517[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: sergioajiki <sergioajk@hotmail.com>
+Date:   Fri Aug 30 10:49:55 2024 -0400
+
+    initial commit
+
+[33mcommit 2c8f9f3b261bee8d2621379c93dcf34e9b632fc0[m
+Author: Sergio Ajiki <115437500+sergioajiki@users.noreply.github.com>
+Date:   Fri Aug 30 10:49:07 2024 -0400
+
+    Initial commit
