@@ -24,6 +24,13 @@
         WHERE id = #{id}
     </select>
 
+    <!-- Verifica se o endereço existe pelo ID -->
+    <select id="existById" resultType="boolean">
+        SELECT COUNT(1) > 0
+        FROM h2dev.endereco
+        WHERE id = #{id}
+    </select>
+
     <!-- Mapeamento para o método updateEnderecoById -->
     <update id="updateEnderecoById" parameterType="EnderecoVo">
         UPDATE h2dev.endereco

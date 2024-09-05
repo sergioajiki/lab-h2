@@ -31,9 +31,16 @@
     </insert>
 
     <!-- Mapeamento para o método getAllPessoas -->
-    <select id="getAllPessoas" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento
-        FROM h2dev.pessoa
+    <!-- <select id="getAllPessoas" resultType="PessoaVo"> -->
+
+    <select id="getAllPessoas" resultMap="PessoaResultMap">
+        SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        FROM h2dev.pessoa p
+        LEFT JOIN endereco e ON p.id_endereco = e.id
+        <!--        SELECT id, nome, idade, email, data_nascimento-->
+        <!--        FROM h2dev.pessoa-->
+
     </select>
 
     <!-- Mapeamento para o método getPessoaById -->
@@ -44,16 +51,18 @@
     <!--    </select>-->
     <select id="getPessoaById" parameterType="Long" resultMap="PessoaResultMap">
         SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
-               e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
         FROM h2dev.pessoa p
         LEFT JOIN endereco e ON p.id_endereco = e.id
         WHERE p.id= #{id}
     </select>
 
     <!-- Mapeamento para o método getPessoaByNome -->
-    <select id="getPessoaByNome" parameterType="String" resultType="PessoaVo">
-        SELECT id, nome, idade, email, data_nascimento
-        FROM h2dev.pessoa
+    <select id="getPessoaByNome" parameterType="String" resultMap="PessoaResultMap">
+        SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        FROM h2dev.pessoa p
+        LEFT JOIN endereco e ON p.id_endereco = e.id
         WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
     </select>
 

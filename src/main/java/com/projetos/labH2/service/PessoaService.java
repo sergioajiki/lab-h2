@@ -3,6 +3,7 @@ package com.projetos.labH2.service;
 import com.projetos.labH2.advice.exceptions.DuplicateEntryException;
 import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
+import com.projetos.labH2.labDAO.EnderecoDao;
 import com.projetos.labH2.labDAO.PessoaDao;
 import com.projetos.labH2.labVO.PessoaVo;
 import com.projetos.labH2.util.EmailValidator;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class PessoaService {
     @Autowired
     private PessoaDao pessoaDao;
+    @Autowired
+    private EnderecoDao enderecoDao;
 
     // Método para obter uma lista com todas as pessoas
     public List<PessoaVo> getAllPessoas() {
@@ -59,8 +62,13 @@ public class PessoaService {
     public void cadastrarPessoa(PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
-        if(pessoaOptional.isPresent()){
+        if (pessoaOptional.isPresent()) {
             throw new DuplicateEntryException(String.format("Email %s já está registrado", pessoa.getEmail()));
+        }
+        if (pessoa.getEndereco() != null && pessoa.getEndereco().getId() != null) {
+            if (!enderecoDao.existById(pessoa.getEndereco().getId())) {
+                throw new NotFoundException(String.format("Endereço com id %d não foi encontrado", pessoa.getEndereco().getId()));
+            }
         }
         normalizarDados(pessoa);
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
@@ -68,7 +76,7 @@ public class PessoaService {
     }
 
     // Método para atualizar uma pessoa
-    public PessoaVo updatePessoaById(@RequestParam Long id, PessoaVo pessoa) {
+    public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {

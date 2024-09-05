@@ -17,4 +17,6 @@ public interface EnderecoDao {
     void updateEnderecoById(EnderecoVo endereco);
 
     void deleteEnderecoById(@Param("id") Long id);
+
+    boolean existById(@Param("id")Long id);
 }
