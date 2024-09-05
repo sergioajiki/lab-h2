@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -81,6 +82,17 @@ public class PessoaService {
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
+        }
+        Optional<PessoaVo> pessoaOptionalByEmail = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
+
+        if (pessoaOptionalByEmail.isPresent() && !pessoaOptionalByEmail.get().getId().equals(id)) {
+            throw new DuplicateEntryException(String.format("Email %s já está registrado", pessoa.getEmail()));
+        }
+
+        if (pessoa.getEndereco() != null && pessoa.getEndereco().getId() != null) {
+            if (!enderecoDao.existById(pessoa.getEndereco().getId())) {
+                throw new NotFoundException(String.format("Endereço com id %d não foi encontrado", pessoa.getEndereco().getId()));
+            }
         }
         normalizarDados(pessoa);
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));

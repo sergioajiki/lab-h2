@@ -31,8 +31,6 @@
     </insert>
 
     <!-- Mapeamento para o método getAllPessoas -->
-    <!-- <select id="getAllPessoas" resultType="PessoaVo"> -->
-
     <select id="getAllPessoas" resultMap="PessoaResultMap">
         SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
         e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
