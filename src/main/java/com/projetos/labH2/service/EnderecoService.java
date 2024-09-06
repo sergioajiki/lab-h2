@@ -17,6 +17,7 @@ public class EnderecoService {
     @Autowired
     private EnderecoDao enderecoDao;
 
+    // Método para cadastrar um endereço
     public void cadastrarEndereco(RequestEnderecoVo endereco) {
         validarCep(endereco.getCep());
 
@@ -30,10 +31,12 @@ public class EnderecoService {
         enderecoDao.registerOnlyEndereco(endereco);
     }
 
+    // Método exibe uma lista com todos o endereços
     public List<EnderecoVo> getAllEndereco() {
         return enderecoDao.getAllEndereco();
     }
 
+    // Método retorna um endereço selecionado por Id
     public EnderecoVo getEnderecoById(Long id){
         Optional<EnderecoVo> enderecoOptional = Optional.ofNullable(enderecoDao.getEnderecoById(id));
         if(enderecoOptional.isEmpty()){
@@ -42,6 +45,7 @@ public class EnderecoService {
         return enderecoDao.getEnderecoById(id);
     }
 
+    // Método atualiza um endereço selecionado por Id
     public EnderecoVo updateEnderecoById(Long id, RequestEnderecoVo endereco){
         validarCep(endereco.getCep());
 
@@ -63,6 +67,7 @@ public class EnderecoService {
         return enderecoToUpdate;
     }
 
+    // Método apaga um endereço selecionado por Id
     public void deleteEndereco(Long id){
         Optional<EnderecoVo> enderecoOptional = Optional.ofNullable(enderecoDao.getEnderecoById(id));
         if(enderecoOptional.isEmpty()){
@@ -77,12 +82,5 @@ public class EnderecoService {
         if(!CepValidator.isValidCep(cep)){
             throw new InvalidCepException("Formato do Cep é inválido");
         }
-    }
-
-    private String formatCep(String cep){
-        if(cep == null || cep.length() != 8) {
-            throw new InvalidCepException("Formato do Cep é inválido. O CEP deve conter exatamente 8 caracteres.");
-        }
-        return cep.substring(0,5) + "-" + cep.substring(5);
     }
 }

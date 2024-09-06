@@ -67,6 +67,7 @@ public class PessoaService {
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com email %s não encontrado", email));
         }
+
         return pessoaOptional.get();
     }
 
@@ -172,6 +173,7 @@ public class PessoaService {
     // Método para converter data_nascimento para o formato yyyy-MM-dd para o registro no banco'
     private String dataNascimentoFormatoBanco(String data) {
         String dataFormatada = FormatDateUtil.converterParaFormatoYYYYMMDD(data);
+
         return dataFormatada;
     }
 }
