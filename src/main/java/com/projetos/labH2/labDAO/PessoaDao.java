@@ -1,6 +1,7 @@
 package com.projetos.labH2.labDAO;
 
 import com.projetos.labH2.labVO.PessoaVo;
+import com.projetos.labH2.labVO.RequestPessoaVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface PessoaDao {
-    void insertPessoa(PessoaVo pessoa);
+    void insertPessoa(RequestPessoaVo pessoa);
 
     List<PessoaVo> getAllPessoas();
 

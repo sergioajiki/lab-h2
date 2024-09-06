@@ -6,7 +6,7 @@
 <mapper namespace="com.projetos.labH2.labDAO.EnderecoDao">
 
     <!-- Mapeamento para o método insertEndereco -->
-    <insert id="insertEndereco" parameterType="EnderecoVo">
+    <insert id="insertEndereco" parameterType="EnderecoVo" useGeneratedKeys="true" keyProperty="id" >
         INSERT INTO h2dev.endereco (logradouro, numero, complemento, bairro, cep, cidade, estado)
         VALUES (#{logradouro}, #{numero}, #{complemento}, #{bairro}, #{cep}, #{cidade}, #{estado})
     </insert>

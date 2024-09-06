@@ -4,6 +4,7 @@ import com.projetos.labH2.advice.exceptions.InvalidCepException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.EnderecoDao;
 import com.projetos.labH2.labVO.EnderecoVo;
+import com.projetos.labH2.labVO.RequestEnderecoVo;
 import com.projetos.labH2.util.CepValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,16 @@ public class EnderecoService {
     @Autowired
     private EnderecoDao enderecoDao;
 
-    public void cadastrarEndereco(EnderecoVo endereco) {
+    public void cadastrarEndereco(RequestEnderecoVo endereco) {
         validarCep(endereco.getCep());
-        normalizarDados(endereco);
-        enderecoDao.insertEndereco(endereco);
+        endereco.setLogradouro(endereco.getLogradouro().toLowerCase());
+        endereco.setComplemento(endereco.getComplemento().toLowerCase());
+        endereco.setBairro(endereco.getBairro().toLowerCase());
+        endereco.setCep(CepValidator.formatCep(endereco.getCep()));
+        endereco.setCidade(endereco.getCidade().toLowerCase());
+        endereco.setEstado(endereco.getEstado().toUpperCase());
+//        normalizarDados(endereco);
+        enderecoDao.registerOnlyEndereco(endereco);
     }
 
     public List<EnderecoVo> getAllEndereco() {
@@ -33,6 +40,7 @@ public class EnderecoService {
         }
         return enderecoDao.getEnderecoById(id);
     }
+
     public EnderecoVo updateEnderecoById(Long id, EnderecoVo endereco){
         Optional<EnderecoVo> enderecoOptional = Optional.ofNullable(enderecoDao.getEnderecoById(id));
         if(enderecoOptional.isEmpty()){
@@ -72,7 +80,7 @@ public class EnderecoService {
         endereco.setLogradouro(endereco.getLogradouro().toLowerCase());
         endereco.setComplemento(endereco.getComplemento().toLowerCase());
         endereco.setBairro(endereco.getBairro().toLowerCase());
-        endereco.setCep(formatCep(endereco.getCep()));
+        endereco.setCep(CepValidator.formatCep(endereco.getCep()));
         endereco.setCidade(endereco.getCidade().toLowerCase());
         endereco.setEstado(endereco.getEstado().toUpperCase());
     }

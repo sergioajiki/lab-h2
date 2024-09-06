@@ -5,9 +5,8 @@ import com.projetos.labH2.advice.exceptions.InvalidEmailFormatException;
 import com.projetos.labH2.advice.exceptions.NotFoundException;
 import com.projetos.labH2.labDAO.EnderecoDao;
 import com.projetos.labH2.labDAO.PessoaDao;
-import com.projetos.labH2.labVO.EnderecoVo;
-import com.projetos.labH2.labVO.PessoaVo;
-import com.projetos.labH2.labVO.RequestCadastroVo;
+import com.projetos.labH2.labVO.*;
+import com.projetos.labH2.util.CepValidator;
 import com.projetos.labH2.util.EmailValidator;
 import com.projetos.labH2.util.FormatDateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,30 +61,32 @@ public class PessoaService {
     }
     // Método para cadastrar uma pessoa com o endereço
     public void registrarPessoaAndEndereco(RequestCadastroVo infoForRegister) {
+        CepValidator.validarCep(infoForRegister.getCep());
+        validarEmail(infoForRegister.getEmail());
+
         EnderecoVo endereco = new EnderecoVo();
-        endereco.setLogradouro(infoForRegister.getLogradouro());
-        endereco.setNumero(infoForRegister.getNumero());
-        endereco.setComplemento(infoForRegister.getComplemento());
-        endereco.setBairro(infoForRegister.getBairro());
-        endereco.setCep(infoForRegister.getCep());
-        endereco.setCidade(infoForRegister.getCidade());
-        endereco.setEstado(infoForRegister.getEstado());
+        endereco.setLogradouro(infoForRegister.getLogradouro().toLowerCase());
+        endereco.setNumero(infoForRegister.getNumero().toLowerCase());
+        endereco.setComplemento(infoForRegister.getComplemento().toLowerCase());
+        endereco.setBairro(infoForRegister.getBairro().toLowerCase());
+        endereco.setCep(CepValidator.formatCep(infoForRegister.getCep().toLowerCase()));
+        endereco.setCidade(infoForRegister.getCidade().toLowerCase());
+        endereco.setEstado(infoForRegister.getEstado().toUpperCase());
 
-        enderecoService.cadastrarEndereco(endereco);
+        enderecoDao.insertEndereco(endereco);
 
-
-        PessoaVo pessoa = new PessoaVo();
+        RequestPessoaVo pessoa = new RequestPessoaVo();
         pessoa.setNome(infoForRegister.getNome());
         pessoa.setIdade(infoForRegister.getIdade());
         pessoa.setEmail(infoForRegister.getEmail().toLowerCase());
-        pessoa.setData_nascimento(infoForRegister.getData_nascimento());
+        pessoa.setData_nascimento(dataNascimentoFormatoBanco(infoForRegister.getData_nascimento()));
         pessoa.setEndereco(endereco);
 
-        cadastrarPessoa(pessoa);
+        pessoaDao.insertPessoa(pessoa);
     }
 
     // Método para cadastrar uma pessoa
-    public void cadastrarPessoa(PessoaVo pessoa) {
+    public void cadastrarPessoa(RequestPessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
         if (pessoaOptional.isPresent()) {
@@ -96,7 +97,8 @@ public class PessoaService {
                 throw new NotFoundException(String.format("Endereço com id %d não foi encontrado", pessoa.getEndereco().getId()));
             }
         }
-        normalizarDados(pessoa);
+        pessoa.setNome(pessoa.getNome().toLowerCase());
+        pessoa.setEmail(pessoa.getEmail().toLowerCase());
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
         pessoaDao.insertPessoa(pessoa);
     }

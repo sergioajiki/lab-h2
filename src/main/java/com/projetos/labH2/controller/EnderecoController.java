@@ -1,6 +1,7 @@
 package com.projetos.labH2.controller;
 
 import com.projetos.labH2.labVO.EnderecoVo;
+import com.projetos.labH2.labVO.RequestEnderecoVo;
 import com.projetos.labH2.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,7 +37,7 @@ public class EnderecoController {
 
     @PostMapping("/cadastrar")
     @Operation(description = "Cadastra as informações de um endereço")
-    public ResponseEntity<String> cadastrarEndereco(@Valid @RequestBody EnderecoVo endereco) {
+    public ResponseEntity<String> cadastrarEndereco(@Valid @RequestBody RequestEnderecoVo endereco) {
         enderecoService.cadastrarEndereco(endereco);
         return ResponseEntity.status(HttpStatus.CREATED).body("Endereço Cadastrado com sucesso!");
     }
