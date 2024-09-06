@@ -21,8 +21,6 @@ public class PessoaService {
     private PessoaDao pessoaDao;
     @Autowired
     private EnderecoDao enderecoDao;
-    @Autowired
-    private EnderecoService enderecoService;
 
     // Método para obter uma lista com todas as pessoas
     public List<PessoaVo> getAllPessoas() {
@@ -50,6 +48,7 @@ public class PessoaService {
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
+
         return pessoaOptional.get();
     }
 
@@ -58,6 +57,7 @@ public class PessoaService {
         // Converte as datas para o formato yyyy-MM-dd
         String dataInicioConvertida = FormatDateUtil.converterParaFormatoYYYYMMDD(dataInicio);
         String dataFimConvertida = FormatDateUtil.converterParaFormatoYYYYMMDD(dataFim);
+
         return pessoaDao.getPessoaByDataNascimentoRange(dataInicioConvertida, dataFimConvertida);
     }
 
@@ -111,18 +111,20 @@ public class PessoaService {
         pessoa.setNome(pessoa.getNome().toLowerCase());
         pessoa.setEmail(pessoa.getEmail().toLowerCase());
         pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
+
         pessoaDao.insertPessoa(pessoa);
     }
 
     // Método para atualizar uma pessoa
-    public PessoaVo updatePessoaById(Long id, PessoaVo pessoa) {
+    public PessoaVo updatePessoaById(Long id, RequestPessoaVo pessoa) {
         validarEmail(pessoa.getEmail());
+
         Optional<PessoaVo> pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
-        Optional<PessoaVo> pessoaOptionalByEmail = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
 
+        Optional<PessoaVo> pessoaOptionalByEmail = Optional.ofNullable(pessoaDao.getPessoaByEmail(pessoa.getEmail().toLowerCase()));
         if (pessoaOptionalByEmail.isPresent() && !pessoaOptionalByEmail.get().getId().equals(id)) {
             throw new DuplicateEntryException(String.format("Email %s já está registrado", pessoa.getEmail()));
         }
@@ -132,11 +134,16 @@ public class PessoaService {
                 throw new NotFoundException(String.format("Endereço com id %d não foi encontrado", pessoa.getEndereco().getId()));
             }
         }
-        normalizarDados(pessoa);
-        pessoa.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
-        pessoa.setId(id); // Confirma que o id seja atualizado corretamente
-        pessoaDao.updatePessoaById(pessoa);
-        return pessoa;
+
+        PessoaVo pessoaToUpdate = pessoaOptional.get();
+        pessoaToUpdate.setNome(pessoa.getNome().toLowerCase());
+        pessoaToUpdate.setEmail(pessoa.getEmail().toLowerCase());
+        pessoaToUpdate.setEndereco(pessoa.getEndereco());
+        pessoaToUpdate.setData_nascimento(dataNascimentoFormatoBanco(pessoa.getData_nascimento()));
+
+        pessoaDao.updatePessoaById(pessoaToUpdate);
+
+        return pessoaToUpdate;
     }
 
     // Método para deletar uma pessoa pelo ID
@@ -145,6 +152,7 @@ public class PessoaService {
         if (pessoaOptional.isEmpty()) {
             throw new NotFoundException(String.format("Pessoa com id %d não encontrado", id));
         }
+
         pessoaDao.deletePessoaById(id);
     }
 

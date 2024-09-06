@@ -88,9 +88,9 @@ public class PessoaController {
     // Endpoint para atualizar uma pessoa pelo ID
     @PutMapping("/{id}")
     @Operation(description = "Atualiza o resgistro da pessoa selecionada por id")
-    public ResponseEntity<String> updatePessoa(@PathVariable Long id, @RequestBody @Valid PessoaVo pessoa) {
+    public ResponseEntity<String> updatePessoa(@PathVariable Long id, @RequestBody @Valid RequestPessoaVo pessoa) {
         PessoaVo pessoaUpdatedById = pessoaService.updatePessoaById(id, pessoa);
-        return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoa.getId() + " atualizada com sucesso!");
+        return ResponseEntity.status(HttpStatus.OK).body("Pessoa " + pessoaUpdatedById.getId() + " atualizada com sucesso!");
     }
 
     // Endpoint para apagar uma pessoa pelo ID
