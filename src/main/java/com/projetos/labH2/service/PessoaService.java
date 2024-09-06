@@ -34,6 +34,11 @@ public class PessoaService {
         return pessoaDao.getPessoaByNome(nome.toLowerCase());
     }
 
+    // Método para uma lista de pessoas selecionada por cidade
+    public List<PessoaVo> getPessoaByCidade(String cidade) {
+        return pessoaDao.getPessoaByCidade(cidade.toLowerCase());
+    }
+
     // Método para obter uma pessoa pelo ID
     public PessoaVo getPessoaById(Long id) {
         var pessoaOptional = Optional.ofNullable(pessoaDao.getPessoaById(id));

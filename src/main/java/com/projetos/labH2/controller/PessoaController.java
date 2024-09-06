@@ -36,6 +36,13 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaByNome);
     }
 
+    @GetMapping("/buscarPorCidade")
+    @Operation(description = "Busca uma lista de pessoa por cidade")
+    public ResponseEntity<List<PessoaVo>> getPessoaByCidade(@RequestParam String cidade) {
+        List<PessoaVo> pessoaByCidade = pessoaService.getPessoaByCidade(cidade);
+        return ResponseEntity.status(HttpStatus.OK).body(pessoaByCidade);
+    }
+
     // Endpoint para buscar uma pessoa pelo ID
     @GetMapping("/{id}")
     @Operation(description = "Busca uma pessoa selecionada por id")
