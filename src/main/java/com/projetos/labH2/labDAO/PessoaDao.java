@@ -15,6 +15,8 @@ public interface PessoaDao {
 
     List<PessoaVo> getPessoaByNome(@Param("nome") String nome);
 
+    List<PessoaVo> getPessoaByBairro(@Param("bairro")String bairro);
+
     List<PessoaVo> getPessoaByCidade(@Param("cidade") String cidade);
 
     List<PessoaVo> getPessoaByDataNascimentoRange(@Param("dataInicio")String dataInicio,@Param("dataFim") String dataFim);

@@ -57,13 +57,22 @@
         WHERE nome LIKE CONCAT('%', #{nome}, '%') -- Busca por nome usando LIKE %name%
     </select>
 
-    <!-- Mapeamento para o método getPessoaByNome -->
+    <!-- Mapeamento para o método getPessoaByCidade -->
     <select id="getPessoaByCidade" parameterType="String" resultMap="PessoaResultMap">
         SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
         e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
         FROM h2dev.pessoa p
         LEFT JOIN endereco e ON p.id_endereco = e.id
         WHERE LOWER(e.cidade) LIKE CONCAT('%', #{cidade}, '%')
+    </select>
+
+    <!-- Mapeamento para o método getPessoaByBairro -->
+    <select id="getPessoaByBairro" parameterType="String" resultMap="PessoaResultMap">
+        SELECT p.id, p.nome, p.idade, p.email, p.data_nascimento,
+        e.id as id_endereco, e.logradouro, e.numero, e.complemento, e.bairro, e.cep, e.cidade, e.estado
+        FROM h2dev.pessoa p
+        LEFT JOIN endereco e ON p.id_endereco = e.id
+        WHERE LOWER(e.bairro) LIKE CONCAT('%', #{bairro}, '%')
     </select>
 
     <!-- Mapeamento para o método getPessoaByDataNascimentoRange -->
@@ -96,5 +105,4 @@
         DELETE FROM h2dev.pessoa
         WHERE id = #{id}
     </delete>
-
 </mapper>

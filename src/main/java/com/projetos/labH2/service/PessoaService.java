@@ -34,6 +34,11 @@ public class PessoaService {
         return pessoaDao.getPessoaByNome(nome.toLowerCase());
     }
 
+    // Método para uma lista de pessoas selecionada por bairro
+    public List<PessoaVo> getPessoaByBairro(String bairro) {
+        return pessoaDao.getPessoaByBairro(bairro.toLowerCase());
+    }
+
     // Método para uma lista de pessoas selecionada por cidade
     public List<PessoaVo> getPessoaByCidade(String cidade) {
         return pessoaDao.getPessoaByCidade(cidade.toLowerCase());

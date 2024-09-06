@@ -29,6 +29,7 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(allPessoa);
     }
 
+    // Endpoint exibir uma lista com pessoas selecionada por nome
     @GetMapping("/buscarPorNome")
     @Operation(description = "Busca uma lista de pessoa por nome")
     public ResponseEntity<List<PessoaVo>> getPessoaByNome(@RequestParam String nome) {
@@ -36,6 +37,15 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(pessoaByNome);
     }
 
+    // Endpoint exibir uma lista com pessoas selecionada por bairro
+    @GetMapping("/buscarPorBairro")
+    @Operation(description = "Busca uma lista de pessoa por bairro")
+    public ResponseEntity<List<PessoaVo>> getPessoaByBairro(@RequestParam String bairro) {
+        List<PessoaVo> pessoaByBairro = pessoaService.getPessoaByBairro(bairro);
+        return ResponseEntity.status(HttpStatus.OK).body(pessoaByBairro);
+    }
+
+    // Endpoint exibir uma lista com pessoas selecionada por cidade
     @GetMapping("/buscarPorCidade")
     @Operation(description = "Busca uma lista de pessoa por cidade")
     public ResponseEntity<List<PessoaVo>> getPessoaByCidade(@RequestParam String cidade) {
