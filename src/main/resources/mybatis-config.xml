@@ -9,6 +9,7 @@
         <!-- Alias para simplificar o uso do VO -->
         <typeAlias alias="PessoaVo" type="com.projetos.labH2.labVO.PessoaVo"/>
         <typeAlias alias="EnderecoVo" type="com.projetos.labH2.labVO.EnderecoVo"/>
+        <typeAlias alias="RequestEnderecoVo" type="com.projetos.labH2.labVO.RequestEnderecoVo"/>
     </typeAliases>
 
     <mappers>

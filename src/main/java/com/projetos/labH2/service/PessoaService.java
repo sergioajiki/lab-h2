@@ -69,6 +69,7 @@ public class PessoaService {
         }
         return pessoaOptional.get();
     }
+
     // Método para cadastrar uma pessoa com o endereço
     public void registrarPessoaAndEndereco(RequestCadastroVo infoForRegister) {
         CepValidator.validarCep(infoForRegister.getCep());

@@ -19,13 +19,14 @@ public class EnderecoService {
 
     public void cadastrarEndereco(RequestEnderecoVo endereco) {
         validarCep(endereco.getCep());
+
         endereco.setLogradouro(endereco.getLogradouro().toLowerCase());
         endereco.setComplemento(endereco.getComplemento().toLowerCase());
         endereco.setBairro(endereco.getBairro().toLowerCase());
         endereco.setCep(CepValidator.formatCep(endereco.getCep()));
         endereco.setCidade(endereco.getCidade().toLowerCase());
         endereco.setEstado(endereco.getEstado().toUpperCase());
-//        normalizarDados(endereco);
+
         enderecoDao.registerOnlyEndereco(endereco);
     }
 
@@ -41,16 +42,25 @@ public class EnderecoService {
         return enderecoDao.getEnderecoById(id);
     }
 
-    public EnderecoVo updateEnderecoById(Long id, EnderecoVo endereco){
+    public EnderecoVo updateEnderecoById(Long id, RequestEnderecoVo endereco){
+        validarCep(endereco.getCep());
+
         Optional<EnderecoVo> enderecoOptional = Optional.ofNullable(enderecoDao.getEnderecoById(id));
         if(enderecoOptional.isEmpty()){
             throw new NotFoundException("Endereço com id " + id + " não foi encontrado");
         }
-        validarCep(endereco.getCep());
-        endereco.setId(id);
-        normalizarDados(endereco);
-        enderecoDao.updateEnderecoById(endereco);
-        return endereco;
+        EnderecoVo enderecoToUpdate = enderecoOptional.get();
+
+        enderecoToUpdate.setLogradouro(endereco.getLogradouro().toLowerCase());
+        enderecoToUpdate.setComplemento(endereco.getComplemento().toLowerCase());
+        enderecoToUpdate.setBairro(endereco.getBairro().toLowerCase());
+        enderecoToUpdate.setCep(CepValidator.formatCep(endereco.getCep()));
+        enderecoToUpdate.setCidade(endereco.getCidade().toLowerCase());
+        enderecoToUpdate.setEstado(endereco.getEstado().toUpperCase());
+
+        enderecoDao.updateEnderecoById(enderecoToUpdate);
+
+        return enderecoToUpdate;
     }
 
     public void deleteEndereco(Long id){
@@ -58,6 +68,7 @@ public class EnderecoService {
         if(enderecoOptional.isEmpty()){
             throw new NotFoundException("Endereço com id " + id + " não foi encontrado");
         }
+
         enderecoDao.deleteEnderecoById(id);
     }
 
@@ -73,15 +84,5 @@ public class EnderecoService {
             throw new InvalidCepException("Formato do Cep é inválido. O CEP deve conter exatamente 8 caracteres.");
         }
         return cep.substring(0,5) + "-" + cep.substring(5);
-    }
-
-    // Método para normalizar os dados para registro no banco
-    private void normalizarDados(EnderecoVo endereco) {
-        endereco.setLogradouro(endereco.getLogradouro().toLowerCase());
-        endereco.setComplemento(endereco.getComplemento().toLowerCase());
-        endereco.setBairro(endereco.getBairro().toLowerCase());
-        endereco.setCep(CepValidator.formatCep(endereco.getCep()));
-        endereco.setCidade(endereco.getCidade().toLowerCase());
-        endereco.setEstado(endereco.getEstado().toUpperCase());
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public interface EnderecoDao {
     void insertEndereco(EnderecoVo endereco);
 
-    void registerOnlyEndereco(RequestEnderecoVo requestEndereco);
+    void registerOnlyEndereco(RequestEnderecoVo endereco);
 
     List<EnderecoVo> getAllEndereco();
 

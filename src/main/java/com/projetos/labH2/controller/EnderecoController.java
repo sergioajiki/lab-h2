@@ -44,7 +44,7 @@ public class EnderecoController {
 
     @PutMapping("/{id}")
     @Operation(description = "Atualiza as informações de um endereço selecionado por Id")
-    public ResponseEntity<String> updateEndereco(@PathVariable Long id, @Valid @RequestBody EnderecoVo endereco) {
+    public ResponseEntity<String> updateEndereco(@PathVariable Long id, @Valid @RequestBody RequestEnderecoVo endereco) {
         EnderecoVo enderecoById = enderecoService.updateEnderecoById(id, endereco);
         return ResponseEntity.status(HttpStatus.OK).body("Endereço com a id " + enderecoById.getId() + " foi atualizado com sucesso!");
     }

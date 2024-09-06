@@ -11,6 +11,12 @@
         VALUES (#{logradouro}, #{numero}, #{complemento}, #{bairro}, #{cep}, #{cidade}, #{estado})
     </insert>
 
+    <!-- Mapeamento para o método registerOnlyEndereco -->
+    <insert id="registerOnlyEndereco" parameterType="RequestEnderecoVo">
+        INSERT INTO h2dev.endereco (logradouro, numero, complemento, bairro, cep, cidade, estado)
+        VALUES (#{logradouro}, #{numero}, #{complemento}, #{bairro}, #{cep}, #{cidade}, #{estado})
+    </insert>
+
     <!-- Mapeamento para o método getAllEndereco -->
     <select id="getAllEndereco" resultType="EnderecoVo">
         SELECT id, logradouro, numero, complemento, bairro, cep, cidade, estado
